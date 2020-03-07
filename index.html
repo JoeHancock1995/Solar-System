@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>Solar System App</title>
+
+        <!-- Babylon.js -->
+        <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/libktx.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+
+        var engine = null;
+        var scene = null;
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+        function createScene() {
+            var scene = new BABYLON.Scene(engine);
+        
+            var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
+
+            // This creates and positions a universal camera (non-mesh)
+	        var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -10), scene);
+
+            // This targets the camera to scene origin
+            camera.setTarget(BABYLON.Vector3.Zero());
+
+            // This attaches the camera to the canvas
+            camera.attachControl(canvas, true);
+
+            // var camera = new BABYLON.UniversalCamera("Camera", 0.4, 1.2, 20, new BABYLON.Vector3(-10, 0, 0), scene);
+        
+            // camera.attachControl(canvas, true);
+        
+            var material1 = new BABYLON.StandardMaterial("mat1", scene);
+            material1.diffuseColor = new BABYLON.Color3(1, 1, 0);
+        
+
+            var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameterX: 109, diameterY: 109, diameterZ: 109}, scene);
+  
+            // var picture10img = new BABYLON.StandardMaterial("sun", scene);
+            //     picture10img.ambientTexture = new BABYLON.Texture('./assets/textures/sun.png');
+
+            var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameterX: .4, diameterY: .4, diameterZ: .4}, scene);
+            mercury.material = material1;
+            var venus = BABYLON.MeshBuilder.CreateSphere("venus", {diameterX: .9, diameterY: .9, diameterZ: .9}, scene);
+            venus.material = material1;
+            var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameterX: 1, diameterY: 1, diameterZ: 1}, scene);
+            earth.material = material1;
+            var mars = BABYLON.MeshBuilder.CreateSphere("mars", {diameterX: .5, diameterY: .5, diameterZ: .5}, scene);
+            mars.material = material1;
+
+            var jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter", {diameterX: 11, diameterY: 11, diameterZ: 11}, scene);
+            jupiter.material = material1;
+            var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameterX: 9, diameterY: 9, diameterZ: 9}, scene);
+            saturn.material = material1;
+            var uranus = BABYLON.MeshBuilder.CreateSphere("uranus", {diameterX: 4, diameterY: 4, diameterZ: 4}, scene);
+            uranus.material = material1;
+            var neptune = BABYLON.MeshBuilder.CreateSphere("neptune", {diameterX: 3, diameterY: 3, diameterZ: 3}, scene);
+            neptune.material = material1;
+            // var pluto = BABYLON.MeshBuilder.CreateSphere("pluto", {diameterX: 1.5, diameterY: 1.5, diameterZ: }, scene);
+            // pluto.material = material1;
+ 
+            sun.position = new BABYLON.Vector3(1, 1, 1);
+            mercury.position = new BABYLON.Vector3(118, 1, 118);
+            venus.position = new BABYLON.Vector3(123, 1, 123);
+            earth.position = new BABYLON.Vector3(125.5, 1, 125.5);
+            mars.position = new BABYLON.Vector3(133, 1, 133);
+            jupiter.position = new BABYLON.Vector3(178, 1, 178);
+            saturn.position = new BABYLON.Vector3(233, 1, 233);
+            uranus.position = new BABYLON.Vector3(353, 1, 353);
+            neptune.position = new BABYLON.Vector3(493, 1, 493);
+
+
+            // sun.position = new Babylon.Vector3(0, 0, 0);
+
+            //Only if LINEAR
+            //scene.fogStart = 20.0;
+            //scene.fogEnd = 60.0;
+        
+            // Skybox
+            var skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
+            var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+            skyboxMaterial.backFaceCulling = false;
+            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("textures/skybox", scene);
+            skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+            skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            skyboxMaterial.disableLighting = true;
+            skybox.material = skyboxMaterial;
+
+            var sunMaterial = new BABYLON.StandardMaterial("sunMaterial"); 
+            sunMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/sun.png"); ;
+            sun.material = sunMaterial;
+
+            var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial"); 
+            mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png"); ;
+            mercury.material = mercuryMaterial;
+
+            var venusMaterial = new BABYLON.StandardMaterial("venusMaterial"); 
+            venusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/venus.png"); ;
+            venus.material = venusMaterial;
+
+            var earthMaterial = new BABYLON.StandardMaterial("earthMaterial"); 
+            earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png"); ;
+            earth.material = earthMaterial;
+
+            var marsMaterial = new BABYLON.StandardMaterial("marsMaterial"); 
+            marsMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mars.png"); ;
+            mars.material = marsMaterial;
+
+            var jupiterMaterial = new BABYLON.StandardMaterial("jupiterMaterial"); 
+            jupiterMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/jupiter.png"); ;
+            jupiter.material = jupiterMaterial;
+
+            var saturnMaterial = new BABYLON.StandardMaterial("saturnMaterial"); 
+            saturnMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/saturn.png"); ;
+            saturn.material = saturnMaterial;
+
+            var uranusMaterial = new BABYLON.StandardMaterial("uranusMaterial"); 
+            uranusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/uranus.png"); ;
+            uranus.material = uranusMaterial;
+
+            var neptuneMaterial = new BABYLON.StandardMaterial("neptuneMaterial"); 
+            neptuneMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/neptune.png"); ;
+            neptune.material = neptuneMaterial;
+
+
+            var alpha = 0;
+            scene.registerBeforeRender(function () {
+            });
+        
+            return scene;
+        };
+        
+        engine = createDefaultEngine();
+        if (!engine) throw 'engine should not be null.';
+        scene = createScene();
+
+        engine.runRenderLoop(function () {
+            if (scene) {
+                scene.render();
+            }
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+</body>
+</html>

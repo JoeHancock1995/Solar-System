@@ -49,7 +49,7 @@
         function createScene() {
             var scene = new BABYLON.Scene(engine);
         
-            var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
+            // var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
 
             // This creates and positions a universal camera (non-mesh)
 	        var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -10), scene);
@@ -125,6 +125,8 @@
             sunMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/sun.png"); ;
             sun.material = sunMaterial;
 
+            var light = new BABYLON.PointLight("Omni0", sun.position, scene);
+            light.difuse = new BABYLON.Color3(1, 1, 1);
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial"); 
             mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png"); ;
             mercury.material = mercuryMaterial;
@@ -160,6 +162,45 @@
 
             var alpha = 0;
             scene.registerBeforeRender(function () {
+                mercury.position.x = 118 * Math.cos(alpha);
+                mercury.rotation.y += 0.0017;
+                mercury.position.z = 118 * Math.sin(alpha);
+                alpha += 0.005;
+
+                venus.position.x = 123 * Math.cos(alpha);
+                venus.rotation.y += 0.00041;
+                venus.position.z = 123 * Math.sin(alpha);
+                alpha += 0.002;
+
+                earth.position.x = 125.5 * Math.cos(alpha);
+                earth.rotation.y += 0.01;
+                earth.position.z = 125.5 * Math.sin(alpha);
+                alpha += 0.001;
+
+                mars.position.x = 133 * Math.cos(alpha);
+                mars.rotation.y += 0.009;
+                mars.position.z = 133 * Math.sin(alpha);
+                alpha += 0.0005;
+
+                jupiter.position.x = 178 * Math.cos(alpha);
+                jupiter.rotation.y += 0.025;
+                jupiter.position.z = 178 * Math.sin(alpha);
+                alpha += 0.0001;
+
+                saturn.position.x = 233 * Math.cos(alpha);
+                saturn.rotation.y += 0.022;
+                saturn.position.z = 233 * Math.sin(alpha);
+                alpha += 0.00003;
+
+                uranus.position.x = 353 * Math.cos(alpha);
+                uranus.rotation.y += 0.015;
+                uranus.position.z = 353 * Math.sin(alpha);
+                alpha += 0.000001;
+
+                neptune.position.x = 493 * Math.cos(alpha);
+                neptune.rotation.y += 0.013;
+                neptune.position.z = 493 * Math.sin(alpha);
+                alpha += 0.001;
             });
         
             return scene;

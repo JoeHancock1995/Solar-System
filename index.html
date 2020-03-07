@@ -50,29 +50,21 @@
             var scene = new BABYLON.Scene(engine);
         
             // var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
-
-            // This creates and positions a universal camera (non-mesh)
-	        var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, 3), scene);
-
-            // This targets the camera to scene origin
-            camera.setTarget(BABYLON.Vector3.Zero());
-
-            // This attaches the camera to the canvas
-            camera.attachControl(canvas, true);
-
-            // var camera = new BABYLON.UniversalCamera("Camera", 0.4, 1.2, 20, new BABYLON.Vector3(-10, 0, 0), scene);
-        
+            var camera = new BABYLON.ArcRotateCamera("Camera", -25, 2, -8, new BABYLON.Vector3(0, 0, 0), scene);
+    camera.attachControl(canvas, true);
+            // // This creates and positions a universal camera (non-mesh)
+	        // var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, 3), scene);
+            // // This targets the camera to scene origin
+            // camera.setTarget(BABYLON.Vector3.Zero());
+            // // This attaches the camera to the canvas
             // camera.attachControl(canvas, true);
-        
+
             var material1 = new BABYLON.StandardMaterial("mat1", scene);
             material1.diffuseColor = new BABYLON.Color3(1, 1, 0);
         
 
             var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameterX: .1, diameterY: .1, diameterZ: .1}, scene);
   
-            // var picture10img = new BABYLON.StandardMaterial("sun", scene);
-            //     picture10img.ambientTexture = new BABYLON.Texture('./assets/textures/sun.png');
-
             var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameterX: .0074, diameterY: .0074, diameterZ: .0074}, scene);
             mercury.material = material1;
  
@@ -91,9 +83,7 @@
             uranus.material = material1;
             var neptune = BABYLON.MeshBuilder.CreateSphere("neptune", {diameterX: .056, diameterY: .056, diameterZ: .056}, scene);
             neptune.material = material1;
-            // var pluto = BABYLON.MeshBuilder.CreateSphere("pluto", {diameterX: 1.5, diameterY: 1.5, diameterZ: }, scene);
-            // pluto.material = material1;
- 
+
             sun.position = new BABYLON.Vector3(1, 0, 1);
             mercury.position = new BABYLON.Vector3(2.1, 0, 2.1);
             venus.position = new BABYLON.Vector3(2.2, 0, 2.2);
@@ -107,10 +97,6 @@
 
             // sun.position = new Babylon.Vector3(0, 0, 0);
 
-            //Only if LINEAR
-            //scene.fogStart = 20.0;
-            //scene.fogEnd = 60.0;
-        
             // Skybox
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 2000.0, scene);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -142,42 +128,11 @@
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial"); 
             mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png"); ;
             mercury.material = mercuryMaterial;
-            
-                // var pivotAt = new BABYLON.Vector3(1, 1, 0);
-                // var axis = new BABYLON.Vector3(0, 1, 0);
-                // var mercuryStart = new BABYLON.Vector3(109.4, 1, 1);
-                // mercury.position = pivotAt;
-	
-                // var axisLine = BABYLON.MeshBuilder.CreateLines("axisLine", {points:[pivotAt.add(axis.scale(-50)),pivotAt.add(axis.scale(50))]}, scene);
-
-                // var pivotTranslate = mercuryStart.subtract(pivotAt);
-                // mercury.setPivotMatrix(BABYLON.Matrix.Translation(pivotTranslate.x, pivotTranslate.y, pivotTranslate.z));
-                
-                // var angle = 0.002;
-                // scene.registerAfterRender(function () { 
-                //     mercury.rotate(axis, angle, BABYLON.Space.LOCAL);
-                // });
 
             var venusMaterial = new BABYLON.StandardMaterial("venusMaterial"); 
             venusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/venus.png"); ;
             venus.material = venusMaterial;
-                         
-            // var pivotAt = new BABYLON.Vector3(1, 1, 0);
-            //     var axis = new BABYLON.Vector3(0, 1, 0);
-            //     var venusStart = new BABYLON.Vector3(110.3, 1, 1);
-            //     venus.position = pivotAt;
-	
-            //     var axisLine = BABYLON.MeshBuilder.CreateLines("axisLine", {points:[pivotAt.add(axis.scale(-50)),pivotAt.add(axis.scale(50))]}, scene);
-
-            //     var pivotTranslate = venusStart.subtract(pivotAt);
-            //     venus.setPivotMatrix(BABYLON.Matrix.Translation(pivotTranslate.x, pivotTranslate.y, pivotTranslate.z));
-                
-            //     var angle = 0.001;
-            //     scene.registerAfterRender(function () { 
-            //         venus.rotate(axis, angle, BABYLON.Space.LOCAL);
-            //     });
-
-
+              
             var earthMaterial = new BABYLON.StandardMaterial("earthMaterial"); 
             earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png"); ;
             earth.material = earthMaterial;

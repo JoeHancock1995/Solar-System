@@ -319,41 +319,41 @@
             var jupiterMaterial = new BABYLON.StandardMaterial("jupiterMaterial"); 
             jupiterMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/jupiter.png"); ;
             jupiter.material = jupiterMaterial;
-                    // //Array of points to construct a spiral with lines
-                    // var jupiterPoints = [];
+                    //Array of points to construct a spiral with lines
+                    var jupiterPoints = [];
 
-                    // var deltaTheta = 0.1;
-                    // var deltaY = 0.000;
+                    var deltaTheta = 0.1;
+                    var deltaY = 0.000;
 
-                    // var radius = 312;
-                    // var theta = 0;
-                    // var Y = 0;
-                    // for (var i = 0; i<64; i++) {
-                    //     jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
-                    //     theta += deltaTheta;
-                    //     Y += deltaY
-                    // }
+                    var radius = 312;
+                    var theta = 0;
+                    var Y = 0;
+                    for (var i = 0; i<64; i++) {
+                        jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+                        theta += deltaTheta;
+                        Y += deltaY
+                    }
 
-                    // //Create lines 
-                    // var jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, updatable: true}, scene); 
+                    //Create lines 
+                    var jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, updatable: true}, scene); 
 
-                    // // Re-set points data and re-draw Lines
-                    // jupiterPoints = [];
+                    // Re-set points data and re-draw Lines
+                    jupiterPoints = [];
 
-                    // deltaTheta = 0.1;
-                    // var deltaY = 0.000;
+                    deltaTheta = 0.1;
+                    var deltaY = 0.000;
 
-                    // radius = 312;
-                    // theta = 0;
-                    // Y = 0;
-                    // for (var i = 0; i<400; i++) { //number of iterations stays the same
-                    //     jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
-                    //     theta += deltaTheta;
-                    //     Y += deltaY
-                    // }
+                    radius = 312;
+                    theta = 0;
+                    Y = 0;
+                    for (var i = 0; i<400; i++) { //number of iterations stays the same
+                        jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+                        theta += deltaTheta;
+                        Y += deltaY
+                    }
 
-                    // //Update lines 
-                    // jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, instance: jupiterLines}, scene); 
+                    //Update lines 
+                    jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, instance: jupiterLines}, scene); 
                             
             var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameterX: 1.67, diameterY: 1.67, diameterZ: 1.67}, scene);
             var saturnMaterial = new BABYLON.StandardMaterial("saturnMaterial"); 

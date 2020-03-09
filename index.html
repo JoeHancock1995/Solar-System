@@ -50,8 +50,8 @@
             var scene = new BABYLON.Scene(engine);
         
             // var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
-            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(4.2, 0, 4.2), scene);
-                camera.setPosition(new BABYLON.Vector3(1, 50, 100));
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(318, 0, -10), scene);
+                camera.setPosition(new BABYLON.Vector3(316, 5, 10));
                 camera.attachControl(canvas, true);
 
             // camera.setTarget(BABYLON.Vector3.Zero());
@@ -77,75 +77,72 @@
 
 
                 // Create a particle system
-    var surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
+            var surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
 
-// Texture of each particle
-surfaceParticles.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/PatrickRyanMS/BabylonJStextures/master/ParticleSystems/Sun/T_SunSurface.png", scene);
+                        // Texture of each particle
+                        surfaceParticles.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/PatrickRyanMS/BabylonJStextures/master/ParticleSystems/Sun/T_SunSurface.png", scene);
 
-// Create core sphere
-var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameter: 20.01, segments: 64}, scene); // surfaceParticles min/ max and sunEmitter.radius must be changed relative to diameter
+                        // Create core sphere
+                        var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameter: 20.01, segments: 64}, scene); // surfaceParticles min/ max and sunEmitter.radius must be changed relative to diameter
 
-// Create core material
-var coreMat = new BABYLON.StandardMaterial("coreMat", scene)
-coreMat.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266); 
+                        // Create core material
+                        var coreMat = new BABYLON.StandardMaterial("coreMat", scene)
+                        coreMat.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266); 
 
-// Assign core material to sphere
-sun.material = coreMat;
+                        // Assign core material to sphere
+                        sun.material = coreMat;
+                        // Pre-warm
+                        surfaceParticles.preWarmStepOffset = 10;
+                        surfaceParticles.preWarmCycles = 100;
+                        // Initial rotation
+                        surfaceParticles.minInitialRotation = -2 * Math.PI;
+                        surfaceParticles.maxInitialRotation = 2 * Math.PI;
+                        // Where the sun particles come from
+                        var sunEmitter = new BABYLON.SphereParticleEmitter();
+                        sunEmitter.radius = 10;
+                        sunEmitter.radiusRange = 0; // emit only from shape surface
 
-// Pre-warm
-surfaceParticles.preWarmStepOffset = 10;
-surfaceParticles.preWarmCycles = 100;
+                        // Assign particles to emitters
+                        surfaceParticles.emitter = sun; // the starting object, the emitter
+                        surfaceParticles.particleEmitterType = sunEmitter;
 
-// Initial rotation
-surfaceParticles.minInitialRotation = -2 * Math.PI;
-surfaceParticles.maxInitialRotation = 2 * Math.PI;
+                        // Color gradient over time
+                        surfaceParticles.addColorGradient(0, new BABYLON.Color4(0.8509, 0.4784, 0.1019, 0.0));
+                        surfaceParticles.addColorGradient(0.4, new BABYLON.Color4(0.6259, 0.3056, 0.0619, 0.5));
+                        surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
+                        surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
 
-// Where the sun particles come from
-var sunEmitter = new BABYLON.SphereParticleEmitter();
-sunEmitter.radius = 10;
-sunEmitter.radiusRange = 0; // emit only from shape surface
+                        // Size of each particle (random between...
+                        surfaceParticles.minSize = 4;
+                        surfaceParticles.maxSize = 7;
 
-// Assign particles to emitters
-surfaceParticles.emitter = sun; // the starting object, the emitter
-surfaceParticles.particleEmitterType = sunEmitter;
+                        // Life time of each particle (random between...
+                        surfaceParticles.minLifeTime = 8.0;
+                        surfaceParticles.maxLifeTime = 8.0;
 
-// Color gradient over time
-surfaceParticles.addColorGradient(0, new BABYLON.Color4(0.8509, 0.4784, 0.1019, 0.0));
-surfaceParticles.addColorGradient(0.4, new BABYLON.Color4(0.6259, 0.3056, 0.0619, 0.5));
-surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
-surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
+                        // Emission rate
+                        surfaceParticles.emitRate = 200;
 
-// Size of each particle (random between...
-surfaceParticles.minSize = 4;
-surfaceParticles.maxSize = 7;
+                        // Blend mode : BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
+                        surfaceParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
 
-// Life time of each particle (random between...
-surfaceParticles.minLifeTime = 8.0;
-surfaceParticles.maxLifeTime = 8.0;
+                        // Set the gravity of all particles
+                        surfaceParticles.gravity = new BABYLON.Vector3(0, 0, 0);
 
-// Emission rate
-surfaceParticles.emitRate = 200;
+                        // Angular speed, in radians
+                        surfaceParticles.minAngularSpeed = -0.4;
+                        surfaceParticles.maxAngularSpeed = 0.4;
 
-// Blend mode : BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
-surfaceParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
+                        // Speed
+                        surfaceParticles.minEmitPower = 0;
+                        surfaceParticles.maxEmitPower = 0;
+                        surfaceParticles.updateSpeed = 0.005;
 
-// Set the gravity of all particles
-surfaceParticles.gravity = new BABYLON.Vector3(0, 0, 0);
+                        // No billboard
+                        surfaceParticles.isBillboardBased = false;
 
-// Angular speed, in radians
-surfaceParticles.minAngularSpeed = -0.4;
-surfaceParticles.maxAngularSpeed = 0.4;
-
-// Speed
-surfaceParticles.minEmitPower = 0;
-surfaceParticles.maxEmitPower = 0;
-surfaceParticles.updateSpeed = 0.005;
-
-// No billboard
-surfaceParticles.isBillboardBased = false;
-
-// Start the particle system
-surfaceParticles.start();
+                        // Start the particle system
+                        surfaceParticles.start();
 
 
 
@@ -322,41 +319,41 @@ surfaceParticles.start();
             var jupiterMaterial = new BABYLON.StandardMaterial("jupiterMaterial"); 
             jupiterMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/jupiter.png"); ;
             jupiter.material = jupiterMaterial;
-                    //Array of points to construct a spiral with lines
-                    var jupiterPoints = [];
+                    // //Array of points to construct a spiral with lines
+                    // var jupiterPoints = [];
 
-                    var deltaTheta = 0.1;
-                    var deltaY = 0.000;
+                    // var deltaTheta = 0.1;
+                    // var deltaY = 0.000;
 
-                    var radius = 312;
-                    var theta = 0;
-                    var Y = 0;
-                    for (var i = 0; i<64; i++) {
-                        jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
-                        theta += deltaTheta;
-                        Y += deltaY
-                    }
+                    // var radius = 312;
+                    // var theta = 0;
+                    // var Y = 0;
+                    // for (var i = 0; i<64; i++) {
+                    //     jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+                    //     theta += deltaTheta;
+                    //     Y += deltaY
+                    // }
 
-                    //Create lines 
-                    var jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, updatable: true}, scene); 
+                    // //Create lines 
+                    // var jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, updatable: true}, scene); 
 
-                    // Re-set points data and re-draw Lines
-                    jupiterPoints = [];
+                    // // Re-set points data and re-draw Lines
+                    // jupiterPoints = [];
 
-                    deltaTheta = 0.1;
-                    var deltaY = 0.000;
+                    // deltaTheta = 0.1;
+                    // var deltaY = 0.000;
 
-                    radius = 312;
-                    theta = 0;
-                    Y = 0;
-                    for (var i = 0; i<400; i++) { //number of iterations stays the same
-                        jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
-                        theta += deltaTheta;
-                        Y += deltaY
-                    }
+                    // radius = 312;
+                    // theta = 0;
+                    // Y = 0;
+                    // for (var i = 0; i<400; i++) { //number of iterations stays the same
+                    //     jupiterPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+                    //     theta += deltaTheta;
+                    //     Y += deltaY
+                    // }
 
-                    //Update lines 
-                    jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, instance: jupiterLines}, scene); 
+                    // //Update lines 
+                    // jupiterLines = BABYLON.MeshBuilder.CreateLines("jupiterLines", {points: jupiterPoints, instance: jupiterLines}, scene); 
                             
             var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameterX: 1.67, diameterY: 1.67, diameterZ: 1.67}, scene);
             var saturnMaterial = new BABYLON.StandardMaterial("saturnMaterial"); 

@@ -50,8 +50,8 @@
             var scene = new BABYLON.Scene(engine);
         
             // var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
-            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(318, 0, -10), scene);
-                camera.setPosition(new BABYLON.Vector3(316, 5, 10));
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(60, 0, -10), scene);
+                camera.setPosition(new BABYLON.Vector3(60, 5, 10));
                 camera.attachControl(canvas, true);
 
             // camera.setTarget(BABYLON.Vector3.Zero());
@@ -495,7 +495,7 @@
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
             skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
             skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-            skyboxMaterial.disableLighting = false;
+            skyboxMaterial.disableLighting = true;
             skybox.material = skyboxMaterial;
 
 
@@ -521,7 +521,7 @@
             sun.material = sunMaterial;
 
             var light = new BABYLON.PointLight("Omni0", sun.position, scene);
-            light.difuse = new BABYLON.Color3(1, 1, 1);
+            light.difuse = new BABYLON.Color3(0, 0, 0);
 
             var alpha = 0;
             var animation1 = new BABYLON.Animation("tutoAnimation", "scaling.z", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,

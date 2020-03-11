@@ -50,17 +50,20 @@
             var scene = new BABYLON.Scene(engine);
         
             // var light = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
-            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(60, 0, -10), scene);
-                camera.setPosition(new BABYLON.Vector3(60, 5, 10));
-                camera.attachControl(canvas, true);
+            var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(4.2, 0, 4.2), scene);
+            
+            // // This targets the camera to scene origin
+            camera.setTarget(BABYLON.Vector3.Zero());
+            // This attaches the camera to the canvas
+            camera.attachControl(canvas, true);
 
             // camera.setTarget(BABYLON.Vector3.Zero());
-            camera.pinchPrecision = 100.0;
-            camera.panningSensibility = 0.0;
-            camera.wheelDeltaPercentage = 0.001;
-            camera.lowerBetaLimit = 0.1;
-            // camera.upperBetaLimit = (Math.PI / 2) * 1;
-            camera.lowerRadiusLimit = .01;
+            // camera.pinchPrecision = 100.0;
+            // camera.panningSensibility = 0.0;
+            // camera.wheelDeltaPercentage = 0.001;
+            // camera.lowerBetaLimit = 0.1;
+            // // camera.upperBetaLimit = (Math.PI / 2) * 1;
+            // camera.lowerRadiusLimit = .01;
 
             // // // This creates and positions a universal camera (non-mesh)
             // var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(4.2, 0, 4.2), scene);
@@ -110,37 +113,22 @@
                         surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
                         surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
 
-                        // Size of each particle (random between...
-                        surfaceParticles.minSize = 4;
+                        surfaceParticles.minSize = 4; // Size of each particle (random between...
                         surfaceParticles.maxSize = 7;
-
-                        // Life time of each particle (random between...
-                        surfaceParticles.minLifeTime = 8.0;
+                        surfaceParticles.minLifeTime = 8.0; // Life time of each particle (random between...
                         surfaceParticles.maxLifeTime = 8.0;
-
-                        // Emission rate
-                        surfaceParticles.emitRate = 200;
-
-                        // Blend mode : BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
-                        surfaceParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
-
-                        // Set the gravity of all particles
-                        surfaceParticles.gravity = new BABYLON.Vector3(0, 0, 0);
-
+                        surfaceParticles.emitRate = 200; // Emission rate
+                        surfaceParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD; // Blend mode : BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
+                        surfaceParticles.gravity = new BABYLON.Vector3(0, 0, 0); // Set the gravity of all particles
                         // Angular speed, in radians
                         surfaceParticles.minAngularSpeed = -0.4;
                         surfaceParticles.maxAngularSpeed = 0.4;
-
                         // Speed
                         surfaceParticles.minEmitPower = 0;
                         surfaceParticles.maxEmitPower = 0;
                         surfaceParticles.updateSpeed = 0.005;
-
-                        // No billboard
-                        surfaceParticles.isBillboardBased = false;
-
-                        // Start the particle system
-                        surfaceParticles.start();
+                        surfaceParticles.isBillboardBased = false; // No billboard
+                        surfaceParticles.start(); // Start the particle system
 
             // var sunMaterial = new BABYLON.StandardMaterial("sunMaterial"); 
             // sunMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/sun.png"); ;
@@ -148,66 +136,143 @@
             // Lets create a sun effect made of 3 different particle system
             // Definition: https://assets.babylonjs.com/particles/systems/sun.json
 
-            var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameterX: .074, diameterY: .074, diameterZ: .074}, scene);
+            var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameterX: .74, diameterY: .74, diameterZ: .74}, scene);
+            mercury.position.x = 11;
+            mercury.parent = sun;
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial"); 
             mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png"); ;
-            mercury.material = mercuryMaterial;            
+            mercury.material = mercuryMaterial;
 
-            var venus = BABYLON.MeshBuilder.CreateSphere("venus", {diameterX: .17, diameterY: .17, diameterZ: .17}, scene);
+            // var moon = BABYLON.Mesh.CreateSphere("moon", 16, 0.7, scene);
+            // // moon.translate(planet.position, 5, BABYLON.Space.WORLD);
+            // moon.position.x = 4;
+            // moon.bakeCurrentTransformIntoVertices();
+            // moon.position.x = 0;
+            // moon.parent = planet;
+
+            var alpha = Math.PI; //animations
+
+            var venus = BABYLON.MeshBuilder.CreateSphere("venus", {diameterX: 1.7, diameterY: 1.7, diameterZ: 1.7}, scene);
+            venus.position.x = 24;
+            venus.parent = sun;
             var venusMaterial = new BABYLON.StandardMaterial("venusMaterial"); 
             venusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/venus.png"); ;
             venus.material = venusMaterial;
+            var alpha = Math.PI;
 
-            var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameterX: .18, diameterY: .18, diameterZ: .18}, scene);
-            var earthMaterial = new BABYLON.StandardMaterial("earthMaterial"); 
+            
+            var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameterX: 1.7, diameterY: 1.7, diameterZ: 1.7}, scene);
+            earth.position.x = 30;
+            earth.parent = sun;
+            var earthMaterial = new BABYLON.StandardMaterial("venusMaterial"); 
             earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png"); ;
             earth.material = earthMaterial;
+            var alpha = Math.PI;
+            
+            
+            scene.beforeRender = function () {
+                venus.position = new BABYLON.Vector3(48 * Math.sin(alpha), venus.parent.position.y, 48 * Math.cos(alpha));
+                venus.rotation.y += .03;
+                alpha += 0.002;
+                earth.position = new BABYLON.Vector3(60 * Math.sin(alpha), earth.parent.position.y, 60 * Math.cos(alpha));
+                earth.rotation.y += .03;
+                alpha += 0.009;
+                };
 
-            var mars = BABYLON.MeshBuilder.CreateSphere("mars", {diameterX: .092, diameterY: .092, diameterZ: .092}, scene);
+            // var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameterX: 1.8, diameterY: 1.8, diameterZ: 1.8}, scene);
+            // earth.position.x = 30;
+            // var earthMaterial = new BABYLON.StandardMaterial("earthMaterial"); 
+            // earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png"); ;
+            // earth.material = earthMaterial;
+            // earth.parent = sun;
+
+            var mars = BABYLON.MeshBuilder.CreateSphere("mars", {diameterX: .92, diameterY: .92, diameterZ: .92}, scene);
             var marsMaterial = new BABYLON.StandardMaterial("marsMaterial"); 
             marsMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mars.png"); ;
             mars.material = marsMaterial;
+            mars.parent = sun;
 
-            var jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter", {diameterX: 2.03, diameterY: 2.03, diameterZ: 2.03}, scene);
+            var jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter", {diameterX: 20.3, diameterY: 20.3, diameterZ: 20.3}, scene);
             var jupiterMaterial = new BABYLON.StandardMaterial("jupiterMaterial"); 
             jupiterMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/jupiter.png"); ;
             jupiter.material = jupiterMaterial;
+            jupiter.parent = sun;
          
-            var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameterX: 1.67, diameterY: 1.67, diameterZ: 1.67}, scene);
+            var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameterX: 16.7, diameterY: 16.7, diameterZ: 16.7}, scene);
             var saturnMaterial = new BABYLON.StandardMaterial("saturnMaterial"); 
             saturnMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/saturn.png"); ;
             saturn.material = saturnMaterial;
+            saturn.parent = sun;
+                                //Array of points to construct a spiral with lines
+                                var saturnPoints = [];
 
-            var uranus = BABYLON.MeshBuilder.CreateSphere("uranus", {diameterX: .74, diameterY: .74, diameterZ: .74}, scene);
+var deltaTheta = 0.1;
+var deltaY = 0.000;
+
+var radius = 1;
+var theta = 0;
+var Y = 0;
+for (var i = 0; i<64; i++) {
+    saturnPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+    theta += deltaTheta;
+    Y += deltaY
+}
+
+//Create lines 
+var saturnLines = BABYLON.MeshBuilder.CreateLines("saturnLines", {points: saturnPoints, updatable: true}, scene); 
+
+// Re-set points data and re-draw Lines
+saturnPoints = [];
+
+deltaTheta = 0.1;
+var deltaY = 0.000;
+
+radius = 1;
+theta = 0;
+Y = 0;
+for (var i = 0; i<400; i++) { //number of iterations stays the same
+    saturnPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+    theta += deltaTheta;
+    Y += deltaY
+}
+
+//Update lines 
+saturnLines = BABYLON.MeshBuilder.CreateLines("saturnLines", {points: saturnPoints, instance: saturnLines}, scene); 
+
+
+            var uranus = BABYLON.MeshBuilder.CreateSphere("uranus", {diameterX: 7.4, diameterY: 7.4, diameterZ: 7.4}, scene);
             var uranusMaterial = new BABYLON.StandardMaterial("uranusMaterial"); 
             uranusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/uranus.png"); ;
             uranus.material = uranusMaterial;
+            uranus.position = sun;
 
-            var neptune = BABYLON.MeshBuilder.CreateSphere("neptune", {diameterX: .56, diameterY: .56, diameterZ: .56}, scene);
+            var neptune = BABYLON.MeshBuilder.CreateSphere("neptune", {diameterX: 5.6, diameterY: 5.6, diameterZ: 5.6}, scene);
             var neptuneMaterial = new BABYLON.StandardMaterial("neptuneMaterial"); 
             neptuneMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/neptune.png"); ;
             neptune.material = neptuneMaterial;
+            neptune.position = sun;
 
             sun.position = new BABYLON.Vector3(0, 0, 0);
-            mercury.position = new BABYLON.Vector3(26, 0, 26);
-            venus.position = new BABYLON.Vector3(48, 0, 48);
-            earth.position = new BABYLON.Vector3(60, 0, 60);
+            // mercury.position = new BABYLON.Vector3(26, 0, 26);
+            // venus.position = new BABYLON.Vector3(48, 0, 48);
+            // earth.position = new BABYLON.Vector3(60, 0, 60);
             mars.position = new BABYLON.Vector3(96, 0, 96);
             jupiter.position = new BABYLON.Vector3(312, 0, 312);
             saturn.position = new BABYLON.Vector3(577, 0, 577);
             uranus.position = new BABYLON.Vector3(1154, 0, 1154);
             neptune.position = new BABYLON.Vector3(1789, 0, 1789);
 
+
             // Skybox
-            var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
-            var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-            skyboxMaterial.backFaceCulling = false; //change backface culling back to false to display skybox.
-            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox", scene);
-            skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-            skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-            skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-            skyboxMaterial.disableLighting = true;
-            skybox.material = skyboxMaterial;
+            // var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
+            // var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+            // skyboxMaterial.backFaceCulling = false; //change backface culling back to false to display skybox.
+            // skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox", scene);
+            // skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+            // skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            // skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            // skyboxMaterial.disableLighting = true;
+            // skybox.material = skyboxMaterial;
 
 
             scene.gravity = new BABYLON.Vector3(0, -9.81, 0);
@@ -239,30 +304,36 @@
         BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
                 
             scene.registerBeforeRender(function () {
-                mercury.position.x = 26 * Math.cos(alpha);
-                mercury.rotation.y += 0.0017;
-                mercury.position.z =26 * Math.sin(alpha);
+                // mercury.position.x = 26 * Math.cos(alpha);
+                // mercury.parent.rotation.y += 0.0017;
+                // mercury.position.z =26 * Math.sin(alpha);
                 // alpha += 0.005;
 
-                venus.position.x = 48 * Math.cos(alpha);
-                venus.rotation.y += 0.00041;
-                venus.position.z = 48 * Math.sin(alpha);
+                // mercury.position = new BABYLON.Vector3(26 * Math.sin(alpha), planet.parent.position.y, 26 * Math.cos(alpha));
+		        // mercury.rotation.y += .03;
+                // alpha += 0.005;
+		        // moon.position = planet.position;
+		        // moon.rotation.y -= .1;
+
+                // venus.position.x = 48 * Math.cos(alpha);
+                // venus.parent.rotation.y += 0.00041;
+                // venus.position.z = 48 * Math.sin(alpha);
                 // alpha += 0.002;
 
                 earth.position.x = 60 * Math.cos(alpha);
-                earth.rotation.y += 0.01;
+                earth.parent.rotation.y += 0.01;
                 earth.position.z = 60 * Math.sin(alpha);
-                // alpha += 0.001;
+                alpha += 0.001;
 
                 mars.position.x = 96 * Math.cos(alpha);
                 mars.rotation.y += 0.009;
                 mars.position.z = 96 * Math.sin(alpha);
-                // alpha += 0.0005;
+                alpha += 0.0005;
 
                 jupiter.position.x = 312 * Math.cos(alpha);
                 jupiter.rotation.y += 0.025;
                 jupiter.position.z = 312 * Math.sin(alpha);
-                // alpha += 0.0001;
+                alpha += 0.0001;
 
                 saturn.position.x = 577 * Math.cos(alpha);
                 saturn.rotation.y += 0.022;

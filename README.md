@@ -1,1 +1,13 @@
 # Solar-System
+
+This web application is a work in progress with the goal of making a model of our solar system including the planets, moons, asteroids, satellites, and more. 
+
+The goal of this app is to make the solar system interactive and have educational value.
+
+This application built with BabylonJS.
+
+![Image description]()
+
+![Image description]()
+
+![Image description]()

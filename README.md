@@ -6,8 +6,8 @@ The goal of this app is to make the solar system interactive and have educationa
 
 This application built with BabylonJS.
 
-![Image description]()
+![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot1.png)
 
-![Image description]()
+![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot2.png)
 
-![Image description]()
+![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot3.png)

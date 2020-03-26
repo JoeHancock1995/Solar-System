@@ -190,15 +190,8 @@
                 alpha += 0.002;
                 earth.position = new BABYLON.Vector3(60 * Math.sin(alpha), earth.parent.position.y, 60 * Math.cos(alpha));
                 earth.rotation.y += .03;
-                alpha += 0.009;
+                alpha += 0.01;
             };
-
-            // var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameterX: 1.8, diameterY: 1.8, diameterZ: 1.8}, scene);
-            // earth.position.x = 30;
-            // var earthMaterial = new BABYLON.StandardMaterial("earthMaterial"); 
-            // earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png"); ;
-            // earth.material = earthMaterial;
-            // earth.parent = sun;
 
             var mars = BABYLON.MeshBuilder.CreateSphere("mars", { diameterX: .92, diameterY: .92, diameterZ: .92 }, scene);
             var marsMaterial = new BABYLON.StandardMaterial("marsMaterial");
@@ -312,15 +305,15 @@
             var light = new BABYLON.PointLight("Omni0", sun.position, scene);
             light.difuse = new BABYLON.Color3(0, 0, 0);
 
-            var alpha = 0;
-            var animation1 = new BABYLON.Animation("tutoAnimation", "scaling.z", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-                BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+            // var alpha = 0;
+            // var animation1 = new BABYLON.Animation("tutoAnimation", "scaling.z", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+            //     BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
 
             scene.registerBeforeRender(function () {
-                // mercury.position.x = 26 * Math.cos(alpha);
-                // mercury.parent.rotation.y += 0.0017;
-                // mercury.position.z =26 * Math.sin(alpha);
-                // alpha += 0.005;
+                mercury.position.x = 26 * Math.cos(alpha);
+                mercury.parent.rotation.y += 0.0017;
+                mercury.position.z =26 * Math.sin(alpha);
+                alpha = 0.005;
 
                 // mercury.position = new BABYLON.Vector3(26 * Math.sin(alpha), planet.parent.position.y, 26 * Math.cos(alpha));
                 // mercury.rotation.y += .03;
@@ -328,10 +321,10 @@
                 // moon.position = planet.position;
                 // moon.rotation.y -= .1;
 
-                // venus.position.x = 48 * Math.cos(alpha);
-                // venus.parent.rotation.y += 0.00041;
-                // venus.position.z = 48 * Math.sin(alpha);
-                // alpha += 0.002;
+                venus.position.x = 48 * Math.cos(alpha);
+                venus.parent.rotation.y += 0.0041;
+                venus.position.z = 48 * Math.sin(alpha);
+                alpha = 0.002;
 
                 // earth.position.x = 60 * Math.cos(alpha);
                 // earth.parent.rotation.y += 0.005;

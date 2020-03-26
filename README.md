@@ -8,7 +8,7 @@ This application built with BabylonJS.
 
 ## Seperate versions
 
-Currently the Babylon.js version is working. Unfortunately the issue of individual planet orbits has put this version on hiatus while a three.js version is created. To run this just open the index.html file within the SolarSystem(Babylon.js) folder on a server.
+To run this just open the index.html folder on a server.
 
 
 

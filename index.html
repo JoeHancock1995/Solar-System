@@ -116,6 +116,7 @@
 
 //SUN-------------------------------------------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------//
+
             var surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
     
             // Texture of each particle
@@ -182,15 +183,13 @@
 //----------------------------------------------------------------------------------------------------------------//
             var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", { diameterX: .74, diameterY: .74, diameterZ: .74 }, scene);
             mercury.position.x = 22;
-            mercury.parent = sun;
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial");
             mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png");;
             mercury.material = mercuryMaterial;
-            var alpha = Math.PI; //animations
+
 
             var venus = BABYLON.MeshBuilder.CreateSphere("venus", { diameterX: 1.7, diameterY: 1.7, diameterZ: 1.7 }, scene);
             venus.position.x = 48;
-            venus.parent = sun;
             var venusMaterial = new BABYLON.StandardMaterial("venusMaterial");
             venusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/venus.png");;
             venus.material = venusMaterial;
@@ -282,7 +281,10 @@
 //----------------------------------------------------------------------------------------------------------------//
             sun.position = new BABYLON.Vector3(0, 0, 0);
             mercury.position = new BABYLON.Vector3(26, 0, 26);
+            mercury.parent = sun;
             venus.position = new BABYLON.Vector3(48, 0, 48);
+            venus.parent = mercury;
+            venus.position.z = -10;
             earth.position = new BABYLON.Vector3(60, 0, 60);
             mars.position = new BABYLON.Vector3(96, 0, 96);
             jupiter.position = new BABYLON.Vector3(312, 0, 312);
@@ -376,7 +378,7 @@
         window.addEventListener("resize", function () {
             engine.resize();
         });
-        
+
     </script>
 </body>
 

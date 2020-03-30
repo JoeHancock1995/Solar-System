@@ -50,65 +50,96 @@
             var scene = new BABYLON.Scene(engine);
         
             // Setup camera
-            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, BABYLON.Vector3.Zero(), scene);
-            camera.setPosition(new BABYLON.Vector3(0, 20, -25));
+            var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, 0), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
             camera.attachControl(canvas, true);
+            BABYLON.SceneLoader.Append("./assets/", "solar4.gltf", scene, function (scene) {
+                scene.createDefaultCameraOrLight(false, false, false);
+                scene.activeCamera.alpha += Math.PI;
+
+            });
+            // BABYLON.SceneLoader.Append("./assets/", "mercury1.gltf", scene, function (scene) {
+            //     scene.createDefaultCameraOrLight(false, false, false);
+            //     // scene.activeCamera.alpha += Math.PI;
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "venus1.gltf", scene, function (scene) {
+            //         scene.createDefaultCameraOrLight(false, false, false);
+            //     // scene.activeCamera.alpha += Math.PI;
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "earth1.gltf", scene, function (scene) {
+            //         scene.createDefaultCameraOrLight(false, false, false);
+            //     // scene.activeCamera.alpha += Math.PI;
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "mars1.gltf", scene, function (scene) {
+            //         scene.createDefaultCameraOrLight(false, false, false);
+            //     // scene.activeCamera.alpha += Math.PI;
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "jupiter1.gltf", scene, function (scene) {
+            //     scene.createDefaultCameraOrLight(false, false, false);
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "saturn.gltf", scene, function (scene) {
+            //     scene.createDefaultCameraOrLight(false, false, false);           
+            //  });
+            //     BABYLON.SceneLoader.Append("./assets/", "neptune1.gltf", scene, function (scene) {
+            //     scene.createDefaultCameraOrLight(false, false, false);
+            // });
+            //     BABYLON.SceneLoader.Append("./assets/", "uranus1.gltf", scene, function (scene) {
+            //     scene.createDefaultCameraOrLight(false, false, false);
+            // });
+
+
+
+
+
+            
+            // // sun sphere
+            // var sun = BABYLON.Mesh.CreateSphere("sun", 16, 1, scene);
+        	// sun.position = new BABYLON.Vector3(0, 0, 0);
+            // var material = new BABYLON.StandardMaterial("sunmaterial", scene);
+            // sun.material = material;
+            // sun.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
         
-            // sun sphere
-            var sun = BABYLON.Mesh.CreateSphere("sun", 16, 1, scene);
-        	sun.position = new BABYLON.Vector3(0, 0, 0);
-            var material = new BABYLON.StandardMaterial("sunmaterial", scene);
-            sun.material = material;
-            sun.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
-        
-            // sun light
-            var light0 = new BABYLON.PointLight("Omni0", sun.position, scene);
-            light0.diffuse = new BABYLON.Color3(1, 1, 1);
+        //     // sun light
+        //     var light0 = new BABYLON.PointLight("Omni0", sun.position, scene);
+        //     light0.diffuse = new BABYLON.Color3(1, 1, 1);
         	
         
-        	var ref = BABYLON.Mesh.CreateGround("gnd", 40, 40, 16, scene);
-        	ref.material = new BABYLON.StandardMaterial("gmat", scene);
-        	ref.material.wireframe = true;
+        // 	var ref = BABYLON.Mesh.CreateGround("gnd", 40, 40, 16, scene);
+        // 	ref.material = new BABYLON.StandardMaterial("gmat", scene);
+        // 	ref.material.wireframe = true;
         
-        	// planet
-            var planet = BABYLON.Mesh.CreateSphere("planet", 16, 2, scene);
-        	planet.position.x = 4;
-        	planet.parent = sun;
+        // 	// planet
+        //     var planet = BABYLON.Mesh.CreateSphere("planet", 16, 2, scene);
+        // 	planet.position.x = 4;
+        // 	planet.parent = sun;
+        // 	var planetMaterial = new BABYLON.StandardMaterial("planetSurface", scene);
+        //     planetMaterial.diffuseTexture = new BABYLON.Texture("textures/earth.jpg", scene);
+        // 	planet.material = planetMaterial
+        //     planet.material.diffuseColor = new BABYLON.Color3(1, 1, 1);
+        //     planet.material.specularColor = new BABYLON.Color3(0, 0, 0);
         
+        // 	// moon
+        //     var moon = BABYLON.Mesh.CreateSphere("moon", 16, 0.7, scene);
+        // 	moon.position.x = 4;
+        // 	moon.bakeCurrentTransformIntoVertices();
+        // 	moon.position.x = 0;
         
+        //     // Animations
+        //     var alpha = Math.PI;
+        //     scene.beforeRender = function () {
+        // 		planet.position = new BABYLON.Vector3(10 * Math.sin(alpha), planet.parent.position.y, 10 * Math.cos(alpha));
+        // 		planet.rotation.y += .03;
         
-        	var planetMaterial = new BABYLON.StandardMaterial("planetSurface", scene);
-            planetMaterial.diffuseTexture = new BABYLON.Texture("textures/earth.jpg", scene);
-        	planet.material = planetMaterial
-            planet.material.diffuseColor = new BABYLON.Color3(1, 1, 1);
-            planet.material.specularColor = new BABYLON.Color3(0, 0, 0);
-        
-        	// moon
-            var moon = BABYLON.Mesh.CreateSphere("moon", 16, 0.7, scene);
-        	// moon.translate(planet.position, 5, BABYLON.Space.WORLD);
-        	moon.position.x = 4;
-        	moon.bakeCurrentTransformIntoVertices();
-        	moon.position.x = 0;
-        	// moon.parent = planet;
-        
-            // Animations
-            var alpha = Math.PI;
-            scene.beforeRender = function () {
-        		planet.position = new BABYLON.Vector3(10 * Math.sin(alpha), planet.parent.position.y, 10 * Math.cos(alpha));
-        		planet.rotation.y += .03;
-        
-        		moon.position = planet.position;
-        		moon.rotation.y -= .1;
-        		
-        		// moon.position = new BABYLON.Vector3(5 * Math.sin(alpha-.8), moon.parent.position.y, 5 * Math.cos(alpha-.8));
+        // 		moon.position = planet.position;
+        // 		moon.rotation.y -= .1;
+        		        				
+        // 		alpha += 0.005;
         				
-        		alpha += 0.005;
-        				
-        		// spin
-        //		planet.rotate(BABYLON.Axis.Y, 0.05, BABYLON.Space.WORLD);
-        //		planet.rotate(BABYLON.Axis.Y, 0.05, BABYLON.Space.LOCAL);
-        //		moon.rotate(BABYLON.Axis.Y, -0.05, BABYLON.Space.LOCAL);
-            };
+        // 		// spin
+        // 		// planet.rotate(BABYLON.Axis.Y, 0.05, BABYLON.Space.WORLD);
+        // 		// planet.rotate(BABYLON.Axis.Y, 0.05, BABYLON.Space.LOCAL);
+        // 		// moon.rotate(BABYLON.Axis.Y, -0.05, BABYLON.Space.LOCAL);
+        //     };
         
             return scene;
         }

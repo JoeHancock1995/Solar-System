@@ -8,7 +8,7 @@ This application built with BabylonJS.
 
 ## Seperate versions
 
-To run this just open the index.html folder on a server.
+To run this just open the index.html folder on a local server.
 
 
 

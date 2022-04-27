@@ -4,7 +4,7 @@ This web application is a work in progress with the goal of making a model of ou
 
 The goal of this app is to make the solar system interactive and have educational value.
 
-This application built with BabylonJS.
+This application was built with BabylonJS.
 
 ## Seperate versions
 

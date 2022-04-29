@@ -242,42 +242,42 @@ function createScene() {
        
             scene.registerBeforeRender(function () {
                 mercury.position.x = 26 * Math.cos(alpha);
-                mercury.parent.rotation.y += 0.05;
+                mercury.parent.rotation.y += 0.042;
                 mercury.position.z =26 * Math.sin(alpha);
                 alpha = 0.005;
                 
                 venus.position.x = 48 * Math.cos(alpha);
-                venus.parent.rotation.y += 0.041;
+                venus.parent.rotation.y += 0.016;
                 venus.position.z = 48 * Math.sin(alpha);
                 alpha = 0.002;
 
                 earth.position.x = 60 * Math.cos(alpha);
-                earth.parent.rotation.y += 0.017;
+                earth.parent.rotation.y += 0.01;
                 earth.position.z = 60 * Math.sin(alpha);
                 alpha += 0.001;
 
                 mars.position.x = 96 * Math.cos(alpha);
-                mars.parent.rotation.y += 0.009;
+                mars.parent.rotation.y += 0.005;
                 mars.position.z = 96 * Math.sin(alpha);
                 alpha += 0.0005;
 
                 jupiter.position.x = 312 * Math.cos(alpha);
-                jupiter.parent.rotation.y += 0.0025;
+                jupiter.parent.rotation.y += 0.00084;
                 jupiter.position.z = 312 * Math.sin(alpha);
                 alpha += 0.001;
 
                 saturn.position.x = 577 * Math.cos(alpha);
-                saturn.parent.rotation.y += 0.0022;
+                saturn.parent.rotation.y += 0.00034;
                 saturn.position.z = 577 * Math.sin(alpha);
                 alpha += 0.00003;
 
                 uranus.position.x = 1154 * Math.cos(alpha);
-                uranus.parent.rotation.y += 0.0015;
+                uranus.parent.rotation.y += 0.000015;
                 uranus.position.z = 1154 * Math.sin(alpha);
                 alpha += 0.000001;
 
                 neptune.position.x = 1789 * Math.cos(alpha);
-                neptune.parent.rotation.y += 0.0013;
+                neptune.parent.rotation.y += 0.000006;
                 neptune.position.z = 1789 * Math.sin(alpha);
                 alpha += 0.001;
             });

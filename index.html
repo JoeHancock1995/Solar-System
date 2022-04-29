@@ -81,6 +81,9 @@ function createScene() {
             var sun = BABYLON.Mesh.CreateSphere("sun", 40, 20, scene); // surfaceParticles min/ max and sunEmitter.radius must be changed relative to diameter
             sun.position = new BABYLON.Vector3(0, 0, 0);
 
+            var sunMercury = BABYLON.Mesh.CreateSphere("sunMercury", 0, 0, scene); //venus parent 
+            sunMercury.position = new BABYLON.Vector3(0, 0, 0);
+
             var sunVenus = BABYLON.Mesh.CreateSphere("sunVenus", 0, 0, scene); //venus parent 
             sunVenus.position = new BABYLON.Vector3(0, 0, 0);
 
@@ -121,7 +124,7 @@ function createScene() {
 
             var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", { diameterX: .74, diameterY: .74, diameterZ: .74 }, scene);
             mercury.position.x = 22;
-            mercury.parent = sun;
+            mercury.parent = sunMercury;
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial");
             mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png");;
             mercury.material = mercuryMaterial;
@@ -217,6 +220,7 @@ function createScene() {
 
             // skybox.checkCollisions = true;
             sun.checkCollisions = false;
+            sunMercury.checkCollisions = false;
             sunVenus.checkCollisions = false;
             sunEarth.checkCollisions = false;
             sunMars.checkCollisions = false;

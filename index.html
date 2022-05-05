@@ -58,11 +58,11 @@
 function createScene() {
             BABYLON.Animation.AllowMatricesInterpolation = true;
             var scene = new BABYLON.Scene(engine);
-            var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 40, 50), scene);
+            var camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 60, 90), scene);
             camera.setTarget(BABYLON.Vector3.Zero());
             camera.attachControl(canvas, true);
 
-//SKYBOX----------------------------------------------------------------------------------------------------------//
+//SKYBOX-------------------------------- --------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------//
 
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
@@ -304,6 +304,49 @@ function createScene() {
             engine.resize();
         });
     </script>
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+  
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
+  
+    // TODO: Add SDKs for Firebase products that you want to use
+  
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+  
+    // Your web app's Firebase configuration
+  
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+    const firebaseConfig = {
+  
+      apiKey: "AIzaSyDnYd4GRuNcHd4hALKufbQKfdk_q9zBcws",
+  
+      authDomain: "plumedata-f27d6.firebaseapp.com",
+  
+      projectId: "plumedata-f27d6",
+  
+      storageBucket: "plumedata-f27d6.appspot.com",
+  
+      messagingSenderId: "642082095552",
+  
+      appId: "1:642082095552:web:29b256724d0fada78f8825",
+  
+      measurementId: "G-M3GJZ358K4"
+  
+    };
+  
+  
+    // Initialize Firebase
+  
+    const app = initializeApp(firebaseConfig);
+  
+    const analytics = getAnalytics(app);
+  
+  </script>
 </body>
 
 </html>

@@ -12,8 +12,8 @@ To run this just open the index.html folder on a local server.
 
 
 
-![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot1.png)
+![Image description](https://raw.githubusercontent.com/JoeHancock1995/Solar-System/master/public/assets/screenshot1.png)
 
-![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot2.png)
+![Image description](https://raw.githubusercontent.com/JoeHancock1995/Solar-System/master/public/assets/screenshot3.png)
 
-![Image description](https://github.com/JoeHancock1995/Solar-System/blob/master/assets/screenshot3.png)
+![Image description](https://raw.githubusercontent.com/JoeHancock1995/Solar-System/master/public/assets/screenshot2.png)

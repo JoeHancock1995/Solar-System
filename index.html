@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -6,6 +7,7 @@
 
     <title>Solar System App</title> 
 
+    
     <!-- Babylon.js -->
     <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -68,7 +70,7 @@ function createScene() {
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
             skyboxMaterial.backFaceCulling = false; //change backface culling back to false to display skybox.
-            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./public/assets/textures/skybox", scene);
+            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox", scene);
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
             skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
             skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -78,7 +80,7 @@ function createScene() {
 //SUN-------------------------------------------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------//
             
-            var sun = BABYLON.Mesh.CreateSphere("sun",{ diameterX: 100, diameterY: 100, diameterZ: 100 }, scene); // surfaceParticles min/ max and sunEmitter.radius must be changed relative to diameter
+            var sun = BABYLON.Mesh.CreateSphere("sun", 40, 20, scene); // surfaceParticles min/ max and sunEmitter.radius must be changed relative to diameter
             sun.position = new BABYLON.Vector3(0, 0, 0);
 
             var sunMercury = BABYLON.Mesh.CreateSphere("sunMercury", 0, 0, scene); //venus parent 
@@ -126,7 +128,7 @@ function createScene() {
             mercury.position.x = 22;
             mercury.parent = sunMercury;
             var mercuryMaterial = new BABYLON.StandardMaterial("mercuryMaterial");
-            mercuryMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/mercury.png");;
+            mercuryMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mercury.png");;
             mercury.material = mercuryMaterial;
             var alpha = Math.PI; //animations
 
@@ -135,7 +137,7 @@ function createScene() {
             venus.position.x = 48;
             venus.parent = sunVenus;
             var venusMaterial = new BABYLON.StandardMaterial("venusMaterial");
-            venusMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/venus.png");;
+            venusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/venus.png");;
             venus.material = venusMaterial;
             var alpha = Math.PI;
 
@@ -144,7 +146,7 @@ function createScene() {
             earth.position.x = 60;
             earth.parent = sunEarth;
             var earthMaterial = new BABYLON.StandardMaterial("earthMaterial");
-            earthMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/earth.png");;
+            earthMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/earth.png");;
             earth.material = earthMaterial;
             var alpha = Math.PI;
 
@@ -153,7 +155,7 @@ function createScene() {
             mars.position.x = 96;
             mars.parent = sunMars;
             var marsMaterial = new BABYLON.StandardMaterial("marsMaterial");
-            marsMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/mars.png");;
+            marsMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/mars.png");;
             mars.material = marsMaterial;
             var alpha = Math.PI;
 
@@ -162,7 +164,7 @@ function createScene() {
             jupiter.position.x = 312;
             jupiter.parent = sunJupiter;
             var jupiterMaterial = new BABYLON.StandardMaterial("jupiterMaterial");
-            jupiterMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/jupiter.png");;
+            jupiterMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/jupiter.png");;
             jupiter.material = jupiterMaterial;
             var alpha = Math.PI;
 
@@ -171,7 +173,7 @@ function createScene() {
             saturn.position.x = 577;
             saturn.parent = sunSaturn;
             var saturnMaterial = new BABYLON.StandardMaterial("saturnMaterial");
-            saturnMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/saturn.png");;
+            saturnMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/saturn.png");;
             saturn.material = saturnMaterial;
             var alpha = Math.PI;
 
@@ -180,7 +182,7 @@ function createScene() {
             uranus.position.x = 1154;
             uranus.parent = sunUranus;
             var uranusMaterial = new BABYLON.StandardMaterial("uranusMaterial");
-            uranusMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/uranus.png");;
+            uranusMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/uranus.png");;
             uranus.material = uranusMaterial;
             var alpha = Math.PI;
 
@@ -189,7 +191,7 @@ function createScene() {
             neptune.position.x = 1789;
             neptune.parent = sunNeptune;
             var neptuneMaterial = new BABYLON.StandardMaterial("neptuneMaterial");
-            neptuneMaterial.ambientTexture = new BABYLON.Texture("./public/assets/textures/neptune.png");;
+            neptuneMaterial.ambientTexture = new BABYLON.Texture("./assets/textures/neptune.png");;
             neptune.material = neptuneMaterial;
             var alpha = Math.PI;
 
@@ -304,7 +306,49 @@ function createScene() {
             engine.resize();
         });
     </script>
+<script type="module">
 
+    // Import the functions you need from the SDKs you need
+  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+  
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
+  
+    // TODO: Add SDKs for Firebase products that you want to use
+  
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+  
+    // Your web app's Firebase configuration
+  
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+    const firebaseConfig = {
+  
+      apiKey: "AIzaSyDnYd4GRuNcHd4hALKufbQKfdk_q9zBcws",
+  
+      authDomain: "plumedata-f27d6.firebaseapp.com",
+  
+      projectId: "plumedata-f27d6",
+  
+      storageBucket: "plumedata-f27d6.appspot.com",
+  
+      messagingSenderId: "642082095552",
+  
+      appId: "1:642082095552:web:29b256724d0fada78f8825",
+  
+      measurementId: "G-M3GJZ358K4"
+  
+    };
+  
+  
+    // Initialize Firebase
+  
+    const app = initializeApp(firebaseConfig);
+  
+    const analytics = getAnalytics(app);
+  
+  </script>
 </body>
 
 </html>
